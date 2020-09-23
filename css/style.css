@@ -1,0 +1,85 @@
+body {
+	background-color: #CED6FA;
+	margin: 0px;
+	margin-right: 60px;
+	margin-left: 60px;
+	margin-bottom: 30px; 
+}
+h1{
+	text-align: center;
+	font-family: madam frilleug;
+	color: #073570;
+	font-size: 40px;
+}
+h2{
+	text-align: right;
+	font-family: marker twins;
+	color: #073570;
+	font-size: 20px;
+}
+p{
+	font-family: gill sans;
+	text-align: center;
+	font-size: 25px;
+	padding-right: 100px;
+	padding-left: 100px;
+}
+.picture{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+} 
+nav{
+	text-align: center;
+}
+
+li{
+	display: inline;
+	font-size: 15px;
+	font-family: gill sans;
+	padding-right: 32px;
+}
+
+a{
+	text-decoration: none;
+	color: #073570;
+	text-align: center;
+}
+a:hover{
+	color:white;
+}
+a:visted{
+	color:#073570;
+}
+.myform{
+ 	padding:20px;
+ 	font-family: gill sans;
+ 	color: #073570;
+}
+.myform .form-group{
+	padding-bottom: 15px;
+}
+.myform label{
+	display: block;
+}
+.myform input[type="text"], .myform textarea{
+	padding: 8px;
+	width: 100%;
+}
+.myform input[type="submit"]{
+	background-color: #FF9078;
+	color: #FDFDF6;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 25px;
+ 	width: 75px;
+    height: 50px;
+}
+#rcorners1 {
+  border-radius: 25px;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+}
+
