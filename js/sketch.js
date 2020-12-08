@@ -7,13 +7,13 @@ let floral;
 let hand;
 let landscape;
 let missing;
-let multiplepersonalities;
+let multiple;
 let plotkin;
 let pulling;
 let purple;
 let redeye;
 let shelbie;
-let waV;
+let wav;
 let insicurities;
 let growth;
 let rachel;
@@ -21,7 +21,7 @@ let strawberry;
 let research;
 let identity;
 let happiness;
-let void;
+let hole;
 let meaningless;
 let janet;
 let bathtub;
@@ -52,7 +52,7 @@ let bailey;
 let parker;
 let jakob;
 let kally;
-let shelbie;
+let shelboo;
 let clark;
 let kayla;
 let nigel;
@@ -60,7 +60,7 @@ let taylor;
 let oliver;
 let loser;
 
-function preload{
+function preload(){
 //high school art
   bandaid  = loadImage("high school art/0.jpg");
 	emma = loadImage("high school art/1.jpg");
@@ -72,14 +72,14 @@ function preload{
 	hand = loadImage("high school art/7.jpg");
   landscape = loadImage("high school art/8.jpg");
 	missing = loadImage("high school art/9.jpg");
-	multiplepersonalities = loadImage("high school art/10.jpg");
+	multiple = loadImage("high school art/10.jpg");
 	plotkin = loadImage("high school art/11.jpg");
   primary = loadImage("high school art/12.jpg")
 	pulling = loadImage("high school art/13.jpg");
 	purple = loadImage("high school art/14.jpg");
   redeye = loadImage("high school art/15.jpg");
 	shelbie = loadImage("high school art/16.jpg");
-	waV = loadImage("high school art/17.jpg");
+	wav = loadImage("high school art/17.jpg");
 //saic freshman year
   insicurities = loadImage("saic freshman/18.jpg");
   growth = loadImage("saic freshman/19.jpg");
@@ -88,7 +88,7 @@ function preload{
   research = loadImage("saic freshman/22.gif");
   identity = loadImage("saic freshman/23.gif");
   happiness = loadImage("saic freshman/24.jpg");
-  void = loadImage("saic freshman/25.jpg");
+  hole = loadImage("saic freshman/25.jpg");
   meaningless = loadImage("saic freshman/26.jpg");
   janet = loadImage("saic freshman/27.jpg");
   bathtub = loadImage("saic freshman/28.jpg");
@@ -124,11 +124,123 @@ function preload{
   bailey = loadImage("Commissions/54.jpg");
   kally = loadImage("Commissions/55.jpg");
   parker = loadImage("commissions/56.jpg");
-  shelbie = loadImage("commissions/57.jpg");
+  shelboo = loadImage("commissions/57.jpg");
   clark = loadImage("Commissions/58.jpg");
   kayla = loadImage("Commissions/59.jpg");
   nigel = loadImage("Commissions/60.jpg");
   jakob = loadImage("commissions/61.jpg");
   taylor = loadImage("commissions/62.jpg");
+}
 
+function loadPage(page) {
+
+	var img = $('<img />');
+	img.load(function() {
+		var container = $('.sample-docs .p'+page);
+		img.css({width: container.width(), height: container.height()});
+		img.appendTo($('.sample-docs .p'+page));
+		container.find('.loader').remove();
+	});
+
+	img.attr('src', 'pages/' +  (page-2) + '.png');
+
+}
+
+function addPage(page, book) {
+
+	var id, pages = book.turn('pages');
+
+	var element = $('<div />', {});
+
+	if (book.turn('addPage', element, page)) {
+		if (page<28) {
+			element.html('<div class="gradient"></div><div class="loader"></div>');
+			loadPage(page);
+		}
+	}
+}
+
+function updateTabs() {
+
+	var tabs = {7: 'Clases', 12:'Constructor', 14:'Properties', 16:'Methods', 23:'Events'},
+		left = [],
+		right = [],
+		book = $('.sample-docs'),
+		actualPage = book.turn('page'),
+		view = book.turn('view');
+
+	for (var page in tabs) {
+		var isHere = $.inArray(parseInt(page, 10), view)!=-1;
+
+		if (page>actualPage && !isHere)
+			right.push('<a href="#page/' + page + '">' + tabs[page] + '</a>');
+		else if (isHere) {
+
+			if (page%2===0)
+				left.push('<a href="#page/' + page + '" class="on">' + tabs[page] + '</a>');
+			else
+				right.push('<a href="#page/' + page + '" class="on">' + tabs[page] + '</a>');
+		} else
+			left.push('<a href="#page/' + page + '">' + tabs[page] + '</a>');
+
+	}
+
+	$('.sample-docs .tabs .left').html(left.join(''));
+	$('.sample-docs .tabs .right').html(right.join(''));
+
+}
+
+
+function numberOfViews(book) {
+	return book.turn('pages') / 2 + 1;
+}
+
+
+function getViewNumber(book, page) {
+	return parseInt((page || book.turn('page'))/2 + 1, 10);
+}
+
+
+function moveBar(yes) {
+	if (Modernizr && Modernizr.csstransforms) {
+		$('#slider .ui-slider-handle').css({zIndex: yes ? -1 : 10000});
+	}
+}
+
+function setPreview(view) {
+
+	var previewWidth = 115,
+		previewHeight = 73,
+		previewSrc = 'pics/preview.jpg',
+		preview = $(_thumbPreview.children(':first')),
+		numPages = (view==1 || view==$('#slider').slider('option', 'max')) ? 1 : 2,
+		width = (numPages==1) ? previewWidth/2 : previewWidth;
+
+	_thumbPreview.
+		addClass('no-transition').
+		css({width: width + 15,
+			height: previewHeight + 15,
+			top: -previewHeight - 30,
+			left: ($($('#slider').children(':first')).width() - width - 15)/2
+		});
+
+	preview.css({
+		width: width,
+		height: previewHeight
+	});
+
+	if (preview.css('background-image')==='' ||
+		preview.css('background-image')=='none') {
+
+		preview.css({backgroundImage: 'url(' + previewSrc + ')'});
+
+		setTimeout(function(){
+			_thumbPreview.removeClass('no-transition');
+		}, 0);
+
+	}
+
+	preview.css({backgroundPosition:
+		'0px -'+((view-1)*previewHeight)+'px'
+	});
 }

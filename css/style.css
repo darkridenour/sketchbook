@@ -3,11 +3,11 @@ body {
 	margin: 0px;
 	margin-right: 60px;
 	margin-left: 60px;
-	margin-bottom: 30px; 
+	margin-bottom: 30px;
 }
 h1{
 	text-align: center;
-	font-family: madam frilleug;
+	font-family: MADE sunflower;
 	color: #073570;
 	font-size: 40px;
 }
@@ -29,7 +29,7 @@ p{
 	margin-left: auto;
 	margin-right: auto;
 	width: 300px;
-} 
+}
 nav{
 	text-align: center;
 }
@@ -82,4 +82,3 @@ a:visted{
   width: 200px;
   height: 150px;
 }
-
